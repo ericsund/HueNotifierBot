@@ -9,7 +9,7 @@ Telegram bot that flashes your Hue lights!
 
 ## Compile it
 
-* One and done: `npx tsc src/index.tx`\
+* One and done: `npx tsc src/index.tx`
 * Listen for changes: `npx tsc src/index.tx -w`
 
 ## Run it
