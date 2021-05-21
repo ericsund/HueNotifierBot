@@ -14,18 +14,26 @@ const mainThread = async () => {
         await sleep(1000);
 
         var newMsg = await TelegramAPICall.getNewMessageText();
+
+        if (newMsg == '') {  }
         
-        if (newMsg === '1') {
-            HueAPICall.toggleLightSwitch(1);
+        else if (Number(newMsg) >= 1 && Number(newMsg) <= 7) {
+            var toggled = HueAPICall.toggleLightSwitch(Number(newMsg));
+            if (toggled) {
+                var lightName = await HueAPICall.getLightName(Number(newMsg));
+                TelegramAPICall.sendMessage(lightName + " was just toggled!");
+            }
         }
 
-        if (newMsg === '2') {
-            HueAPICall.toggleLightSwitch(2);
+        else if (newMsg.includes("sudo")) {
+            TelegramAPICall.sendMessage("Hey... don't be evil.");
         }
 
-        if (newMsg === '3') {
-            HueAPICall.toggleLightSwitch(3);
+        else {
+            var unsupportedString = `That isn't supported.  DM ${process.env.DEV_NAME} if you think something's broken.`
+            TelegramAPICall.sendMessage(unsupportedString);
         }
+
     }
 }
 
