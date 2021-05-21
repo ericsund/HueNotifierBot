@@ -1,7 +1,10 @@
-import { stringify } from "querystring";
+/*
+Methods for making Telegram API calls
+*/
 
 const fetch = require("node-fetch")
-const fs = require('fs');
+
+let updateIds: number[] = [];
 
 export class TelegramAPICall {
     static async getMe(): Promise<void> {
@@ -11,11 +14,29 @@ export class TelegramAPICall {
         return res;
     }
 
-    static async getNewestMessage(): Promise<void> {
+    static async getNewMessageText(): Promise<string> {
+        var newMsgArrived = await TelegramAPICall.messageIsNew();
+
+        if (newMsgArrived) {
+            var res = await _getNewestMessage();
+            var msgText = res["result"].slice(-1)[0]["message"]["text"];
+            return msgText;
+        }
+
+        return '';
+    }
+
+    static async messageIsNew(): Promise<boolean> {
         var res = await _getNewestMessage();
-        // parse it, do stuff...
-        console.log(res);
-        return res;
+
+        var updateId = res["result"].slice(-1)[0]["update_id"];
+        if (updateIds.indexOf(updateId) === -1) {
+            // the chat ID doesn't exist, so add it
+            updateIds.push(updateId);
+            return true;
+        }
+
+        return false;
     }
 }
 
@@ -42,9 +63,6 @@ export async function _getNewestMessage(): Promise<any> {
     })
     .then((res: Response) => {
         return res.json();
-    })
-    .then((res: any) => {
-        return res["result"][0]["message"]["text"];
     })
     .catch((err: any) => {
         return Promise.reject("Failed to make request");
