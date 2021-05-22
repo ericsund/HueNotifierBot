@@ -1,12 +1,6 @@
 # HueNotifierBot
 Telegram bot that flashes your Hue lights!
 
-## Set it up
-
-`npm i typescript --save-dev`\
-`npm i --save-dev @types/node`\
-`npm install dotenv --save`
-
 ## Build and run it
 
 `npm run build`
