@@ -10,6 +10,8 @@ import { sleep } from './utils';
 dotenv.config();
 
 const mainThread = async () => {
+
+    console.log(process.env);
     
     const express = require('express');
     const app = express();
