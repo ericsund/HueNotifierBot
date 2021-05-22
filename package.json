@@ -2,7 +2,7 @@
   "name": "huenotifierbot",
   "version": "1.0.0",
   "description": "Telegram bot that flashes your Hue lights",
-  "main": "index.js",
+  "main": "./src/index.js",
   "dependencies": {
     "typescript": "^4.2.4",
     "node-fetch": "^2.6.1",
@@ -10,7 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "run-test"
+    "test": "run-test",
+    "start": "npx ts-node ./src/index.ts"
   },
   "repository": {
     "type": "git",
