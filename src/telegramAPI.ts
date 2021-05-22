@@ -18,10 +18,10 @@ export class TelegramAPICall {
 
     static async getNewMessageText(): Promise<string> {
         // make sure it's not in a group
-        var isInGroup = await checkInGroup();
-        if (isInGroup) {
-            return ''
-        }
+        // var isInGroup = await checkInGroup();
+        // if (isInGroup) {
+        //     return ''
+        // }
 
         var newMsgArrived = await TelegramAPICall.messageIsNew();
 
@@ -80,7 +80,7 @@ export class TelegramAPICall {
         })
         .catch((err: any) => {
             console.error(err);
-            return Promise.reject("Failed to make request");
+            return Promise.reject("Failed to send message");
         });
     }
 }
@@ -121,7 +121,7 @@ export async function _getMe(): Promise<any> {
     })
     .catch((err: any) => {
         console.error(err);
-        return Promise.reject("Failed to make request");
+        return Promise.reject("TELEGRAM: Failed to get me");
     });
 }
 
@@ -136,7 +136,7 @@ export async function _getNewestMessage(offset: number): Promise<any> {
         })
         .catch((err: any) => {
             console.error(err);
-            return Promise.reject("Failed to make request");
+            return Promise.reject("TELEGRAM: Failed to get newest message");
         });
     }
 
@@ -149,6 +149,6 @@ export async function _getNewestMessage(offset: number): Promise<any> {
     })
     .catch((err: any) => {
         console.error(err);
-        return Promise.reject("Failed to make request");
+        return Promise.reject("TELEGRAM: Failed to get newest message with offset");
     });    
 }

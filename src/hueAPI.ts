@@ -34,7 +34,8 @@ export class HueAPICall {
             return res["name"];
         })
         .catch((err: any) => {
-            return Promise.reject("Failed to make request");
+            console.error(err);
+            return Promise.reject("HUE: Failed to get light name");
         });
     }
 }
@@ -52,7 +53,8 @@ export async function _switchOnOff(lightNum: number, payload: string) {
         return res.json();
     })
     .catch((err: any) => {
-        return Promise.reject("Failed to make request");
+        console.error(err);
+        return Promise.reject("HUE: Failed to make request");
     });
 }
 
@@ -68,6 +70,7 @@ export async function _getOnState(lightNum: number) {
         return res["state"]["on"];
     })
     .catch((err: any) => {
-        return Promise.reject("Failed to make request");
+        console.error(err);
+        return Promise.reject("HUE: Failed to get on state");
     });
 }
