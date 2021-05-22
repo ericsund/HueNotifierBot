@@ -6,12 +6,12 @@
   "dependencies": {
     "typescript": "^4.2.4",
     "node-fetch": "^2.6.1",
-    "dotenv": "^9.0.2"
+    "dotenv": "^9.0.2",
   },
   "devDependencies": {},
   "scripts": {
     "test": "run-test",
-    "start": "npx ts-node ./src/index.ts"
+    "start": "npm i --save-dev @types/node && npx ts-node ./src/index.ts"
   },
   "repository": {
     "type": "git",
