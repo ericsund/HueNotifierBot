@@ -8,10 +8,12 @@
     "node-fetch": "^2.6.1",
     "dotenv": "^9.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^10.12.10"
+  },
   "scripts": {
     "test": "run-test",
-    "start": "npm i --save-dev @types/node && npx ts-node ./src/index.ts"
+    "start": "npx ts-node ./src/index.ts"
   },
   "repository": {
     "type": "git",
