@@ -79,6 +79,7 @@ export class TelegramAPICall {
             return res["result"];
         })
         .catch((err: any) => {
+            console.error(err);
             return Promise.reject("Failed to make request");
         });
     }
@@ -119,6 +120,7 @@ export async function _getMe(): Promise<any> {
         return res["result"];
     })
     .catch((err: any) => {
+        console.error(err);
         return Promise.reject("Failed to make request");
     });
 }
@@ -133,6 +135,7 @@ export async function _getNewestMessage(offset: number): Promise<any> {
             return res.json();
         })
         .catch((err: any) => {
+            console.error(err);
             return Promise.reject("Failed to make request");
         });
     }
@@ -145,6 +148,7 @@ export async function _getNewestMessage(offset: number): Promise<any> {
         return res.json();
     })
     .catch((err: any) => {
+        console.error(err);
         return Promise.reject("Failed to make request");
     });    
 }
