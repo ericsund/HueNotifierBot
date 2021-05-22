@@ -17,6 +17,12 @@ export class TelegramAPICall {
     }
 
     static async getNewMessageText(): Promise<string> {
+        // make sure it's not in a group
+        var isInGroup = await checkInGroup();
+        if (isInGroup) {
+            return ''
+        }
+
         var newMsgArrived = await TelegramAPICall.messageIsNew();
 
         if (newMsgArrived) {
@@ -31,11 +37,12 @@ export class TelegramAPICall {
     static async messageIsNew(): Promise<boolean> {
         var res = await _getNewestMessage(OFFSET);
 
-        // if the user is not whitelisted, just return false and quit
         var userId = res["result"].slice(-1)[0]["message"]["from"]["id"];
-        if (whitelist.indexOf(userId) === -1) {
-            return false;
-        }
+
+        // if the user is not whitelisted, just return false and quit
+        // if (whitelist.indexOf(userId) === -1) {
+        //     return false;
+        // }
 
         var updateId = res["result"].slice(-1)[0]["update_id"];
         if (updateIds.indexOf(updateId) === -1) {
@@ -76,18 +83,27 @@ export class TelegramAPICall {
     }
 }
 
+export async function checkInGroup(): Promise<boolean> {
+    var res = await _getNewestMessage(OFFSET);
+    try {
+        var inGroup = res["result"].slice(-1)[0]["my_chat_member"];
+        var groupCreated = res["result"].slice(-1)[0]["group_chat_created"];
+        
+        if (inGroup || groupCreated) {
+            return true;
+        }
+
+        return false;
+    }
+    catch(TypeError) {
+        return false;
+    }
+}
+
 export async function getChatId(): Promise<number> {
     var res = await _getNewestMessage(OFFSET);
     var chatId = res["result"].slice(-1)[0]["message"]["chat"]["id"];
     return chatId;
-}
-
-export function userIsWhitelisted(userId: number) {
-    if (userId in whitelist) {
-        return true;
-    }
-
-    return false;
 }
 
 export async function _getMe(): Promise<any> {

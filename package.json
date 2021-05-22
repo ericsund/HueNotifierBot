@@ -1,0 +1,25 @@
+{
+  "name": "huenotifierbot",
+  "version": "1.0.0",
+  "description": "Telegram bot that flashes your Hue lights",
+  "main": "index.js",
+  "dependencies": {
+    "typescript": "^4.2.4",
+    "node-fetch": "^2.6.1",
+    "dotenv": "^9.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "run-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericsund/HueNotifierBot.git"
+  },
+  "author": "Eric Sund",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericsund/HueNotifierBot/issues"
+  },
+  "homepage": "https://github.com/ericsund/HueNotifierBot#readme"
+}

@@ -15,7 +15,7 @@ const mainThread = async () => {
 
         var newMsg = await TelegramAPICall.getNewMessageText();
 
-        if (newMsg == '') {  }
+        if (newMsg === '') {  }
         
         else if (Number(newMsg) >= 1 && Number(newMsg) <= 7) {
             var toggled = HueAPICall.toggleLightSwitch(Number(newMsg));
@@ -33,7 +33,6 @@ const mainThread = async () => {
             var unsupportedString = `That isn't supported.  DM ${process.env.DEV_NAME} if you think something's broken.`
             TelegramAPICall.sendMessage(unsupportedString);
         }
-
     }
 }
 
