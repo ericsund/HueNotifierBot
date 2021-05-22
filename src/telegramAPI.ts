@@ -26,6 +26,7 @@ export class TelegramAPICall {
         var newMsgArrived = await TelegramAPICall.messageIsNew();
 
         if (newMsgArrived) {
+            console.log("a new message has arrived!");
             var res = await _getNewestMessage(OFFSET);
             var msgText = res["result"].slice(-1)[0]["message"]["text"];
             return msgText;
