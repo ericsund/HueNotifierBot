@@ -42,6 +42,20 @@ const mainThread = async () => {
             }
         }
 
+        else if (newMsg === 'allOn') {
+            var allOn = HueAPICall.allOn();
+            if (allOn) {
+                TelegramAPICall.sendMessage("All lights are on!");
+            }
+        }
+
+        else if (newMsg === 'allOff') {
+            var allOff = HueAPICall.allOff();
+            if (allOff) {
+                TelegramAPICall.sendMessage("All lights are off!");
+            }
+        }
+
         else if (newMsg.includes("sudo")) {
             TelegramAPICall.sendMessage("Hey... don't be evil.");
         }

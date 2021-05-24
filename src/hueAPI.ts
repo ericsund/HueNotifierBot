@@ -38,6 +38,22 @@ export class HueAPICall {
             return Promise.reject("HUE: Failed to get light name");
         });
     }
+
+    static async allOn(): Promise<boolean> {
+        for (var i = 1; i <= 7; i++) {
+            var res = await _switchOnOff(i, "{\"on\":true}");
+        }
+
+        return true;
+    }
+
+    static async allOff(): Promise<boolean> {
+        for (var i = 1; i <= 7; i++) {
+            var res = await _switchOnOff(i, "{\"on\":false}");
+        }
+
+        return true;
+    }
 }
 
 export async function _switchOnOff(lightNum: number, payload: string) {
