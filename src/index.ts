@@ -7,11 +7,13 @@ import { TelegramAPICall } from './telegramAPI';
 import { HueAPICall } from './hueAPI';
 import { sleep } from './utils';
 
+require('https').globalAgent.options.rejectUnauthorized = false
+
 dotenv.config();
 
 const mainThread = async () => {
 
-    console.log(process.env);
+    // console.log(process.env);
     
     const express = require('express');
     const app = express();
@@ -22,11 +24,10 @@ const mainThread = async () => {
     })
 
     app.listen(port, () => {
-        console.log(`Example app listening at http://localhost:${port}`);
+        console.log(`Hue notifier bot listening at http://localhost:${port}`);
     });
     
     while (true) {
-        console.log("Retrieving the next message!");
         await sleep(1000);
 
         var newMsg = await TelegramAPICall.getNewMessageText();

@@ -26,7 +26,6 @@ export class TelegramAPICall {
         var newMsgArrived = await TelegramAPICall.messageIsNew();
 
         if (newMsgArrived) {
-            console.log("a new message has arrived!");
             var res = await _getNewestMessage(OFFSET);
             var msgText = res["result"].slice(-1)[0]["message"]["text"];
             return msgText;
@@ -41,9 +40,9 @@ export class TelegramAPICall {
         var userId = res["result"].slice(-1)[0]["message"]["from"]["id"];
 
         // if the user is not whitelisted, just return false and quit
-        // if (whitelist.indexOf(userId) === -1) {
-        //     return false;
-        // }
+        if (whitelist.indexOf(userId) === -1) {
+            return false;
+        }
 
         var updateId = res["result"].slice(-1)[0]["update_id"];
         if (updateIds.indexOf(updateId) === -1) {

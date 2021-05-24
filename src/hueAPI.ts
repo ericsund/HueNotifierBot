@@ -23,7 +23,7 @@ export class HueAPICall {
     }
 
     static async getLightName(lightNum: number): Promise<string> {
-        return fetch(`http://192.168.0.16/api/${process.env.HUE_KEY}/lights/${lightNum}/`,
+        return fetch(`${process.env.EXPOSED_BRIDGE}/api/${process.env.HUE_KEY}/lights/${lightNum}/`,
         {
             method: 'GET'
         })
@@ -41,7 +41,7 @@ export class HueAPICall {
 }
 
 export async function _switchOnOff(lightNum: number, payload: string) {
-    return fetch(`http://192.168.0.16/api/${process.env.HUE_KEY}/lights/${lightNum}/state`,
+    return fetch(`${process.env.EXPOSED_BRIDGE}/api/${process.env.HUE_KEY}/lights/${lightNum}/state`,
     {
         method: 'PUT',
         headers: {
@@ -59,7 +59,7 @@ export async function _switchOnOff(lightNum: number, payload: string) {
 }
 
 export async function _getOnState(lightNum: number) {
-    return fetch(`http://192.168.0.16/api/${process.env.HUE_KEY}/lights/${lightNum}/`,
+    return fetch(`${process.env.EXPOSED_BRIDGE}/api/${process.env.HUE_KEY}/lights/${lightNum}/`,
     {
         method: 'GET'
     })
