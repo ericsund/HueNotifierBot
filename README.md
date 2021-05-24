@@ -1,9 +1,13 @@
 # HueNotifierBot
 Telegram bot that flashes your Hue lights!
 
+## Install dependencies
+
+`npm install`
+
 ## Build and run it
 
-`npm run build`
+`npm run build`\
 `npm run start`
 
 ## Usage

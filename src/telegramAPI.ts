@@ -8,7 +8,7 @@ let updateIds: number[] = [];
 let OFFSET = -1;
 
 // *** Add Telegram user IDs to the whitelist here *** //
-let whitelist: number[] = [109512480, 123445374];
+let whitelist: number[] = [109512480, 109602650, 194076630];
 
 export class TelegramAPICall {
     static async getMe(): Promise<void> {
