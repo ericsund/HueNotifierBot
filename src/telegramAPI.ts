@@ -60,7 +60,7 @@ export class TelegramAPICall {
         return false;
     }
 
-    static async sendBulb(): Promise<void> {
+    static async sendSticker(): Promise<void> {
         var chatId = await getChatId();
 
         console.log("sent sticker!");
