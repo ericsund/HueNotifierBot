@@ -10,6 +10,8 @@ let OFFSET = -1;
 // *** Add Telegram user IDs to the whitelist here *** //
 let whitelist: number[] = [109512480, 109602650, 194076630];
 
+var stickerUrl = "https://raw.githubusercontent.com/ericsund/HueNotifierBot/main/stickers/sticker-fred.webp";
+
 export class TelegramAPICall {
     static async getMe(): Promise<void> {
         var res = await _getMe();
@@ -17,12 +19,6 @@ export class TelegramAPICall {
     }
 
     static async getNewMessageText(): Promise<string> {
-        // make sure it's not in a group
-        // var isInGroup = await checkInGroup();
-        // if (isInGroup) {
-        //     return ''
-        // }
-
         var newMsgArrived = await TelegramAPICall.messageIsNew();
 
         if (newMsgArrived) {
@@ -62,6 +58,27 @@ export class TelegramAPICall {
         }
 
         return false;
+    }
+
+    static async sendBulb(): Promise<void> {
+        var chatId = await getChatId();
+
+        console.log("sent sticker!");
+
+        return fetch(`https://api.telegram.org/bot${process.env.BOT_KEY}/sendSticker?chat_id=${chatId}&sticker=${stickerUrl}`,
+        {
+            method: 'GET'
+        })
+        .then((res: Response) => {
+            return res.json();
+        })
+        .then((res: any) => {
+            return res["result"];
+        })
+        .catch((err: any) => {
+            console.error(err);
+            return Promise.reject("Failed to send sticker");
+        });
     }
 
     static async sendMessage(msg: string): Promise<void> {

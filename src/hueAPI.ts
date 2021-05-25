@@ -53,6 +53,19 @@ export class HueAPICall {
         }
 
         return true;
+    } 
+
+    static async getLightStatuses(): Promise<string> {
+        var lightStatusString = "";
+        
+        for (var i = 1; i <= 7; i++) {
+            var currName = await this.getLightName(i);
+            var currStatus = await _getOnState(i);
+            if (currStatus) { lightStatusString += (currName + ": on \n"); }
+            else { lightStatusString += (currName + ": off + \n"); }
+        }
+
+        return lightStatusString;
     }
 }
 
